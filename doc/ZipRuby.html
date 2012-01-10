@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>Module: ZipRuby</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>zipruby.c
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="./README_txt.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./ZipRuby.html">ZipRuby</a>
+  
+    <li><a href="./ZipRuby/Archive.html">ZipRuby::Archive</a>
+  
+    <li><a href="./ZipRuby/Error.html">ZipRuby::Error</a>
+  
+    <li><a href="./ZipRuby/File.html">ZipRuby::File</a>
+  
+    <li><a href="./ZipRuby/Stat.html">ZipRuby::Stat</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module ZipRuby</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="BEST_COMPRESSION">BEST_COMPRESSION
+        
+        <dd class="description">
+        
+      
+        <dt id="BEST_SPEED">BEST_SPEED
+        
+        <dd class="description">
+        
+      
+        <dt id="CHECKCONS">CHECKCONS
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_BZIP2">CM_BZIP2
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_DEFLATE">CM_DEFLATE
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_DEFLATE64">CM_DEFLATE64
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_IMPLODE">CM_IMPLODE
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_PKWARE_IMPLODE">CM_PKWARE_IMPLODE
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_REDUCE_1">CM_REDUCE_1
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_REDUCE_2">CM_REDUCE_2
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_REDUCE_3">CM_REDUCE_3
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_REDUCE_4">CM_REDUCE_4
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_SHRINK">CM_SHRINK
+        
+        <dd class="description">
+        
+      
+        <dt id="CM_STORE">CM_STORE
+        
+        <dd class="description">
+        
+      
+        <dt id="CREATE">CREATE
+        
+        <dd class="description">
+        
+      
+        <dt id="DEFAULT_COMPRESSION">DEFAULT_COMPRESSION
+        
+        <dd class="description">
+        
+      
+        <dt id="EM_NONE">EM_NONE
+        
+        <dd class="description">
+        
+      
+        <dt id="EM_TRAD_PKWARE">EM_TRAD_PKWARE
+        
+        <dd class="description">
+        
+      
+        <dt id="EXCL">EXCL
+        
+        <dd class="description">
+        
+      
+        <dt id="FL_COMPRESSED">FL_COMPRESSED
+        
+        <dd class="description">
+        
+      
+        <dt id="FL_NOCASE">FL_NOCASE
+        
+        <dd class="description">
+        
+      
+        <dt id="FL_NODIR">FL_NODIR
+        
+        <dd class="description">
+        
+      
+        <dt id="FL_UNCHANGED">FL_UNCHANGED
+        
+        <dd class="description">
+        
+      
+        <dt id="NO_COMPRESSION">NO_COMPRESSION
+        
+        <dd class="description">
+        
+      
+        <dt id="TRUNC">TRUNC
+        
+        <dd class="description">
+        
+      
+        <dt id="VERSION">VERSION
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    <!-- Methods -->
+    
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>Class: ZipRuby::Stat</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>zipruby.c
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-new">::new</a>
+    
+    <li><a href="#method-i-comp_method">#comp_method</a>
+    
+    <li><a href="#method-i-comp_size">#comp_size</a>
+    
+    <li><a href="#method-i-crc">#crc</a>
+    
+    <li><a href="#method-i-directory-3F">#directory?</a>
+    
+    <li><a href="#method-i-encryption_method">#encryption_method</a>
+    
+    <li><a href="#method-i-index">#index</a>
+    
+    <li><a href="#method-i-mtime">#mtime</a>
+    
+    <li><a href="#method-i-name">#name</a>
+    
+    <li><a href="#method-i-size">#size</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../ChangeLog.html">ChangeLog</a>
+  
+    <li class="file"><a href="../README_txt.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../ZipRuby.html">ZipRuby</a>
+  
+    <li><a href="../ZipRuby/Archive.html">ZipRuby::Archive</a>
+  
+    <li><a href="../ZipRuby/Error.html">ZipRuby::Error</a>
+  
+    <li><a href="../ZipRuby/File.html">ZipRuby::File</a>
+  
+    <li><a href="../ZipRuby/Stat.html">ZipRuby::Stat</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class ZipRuby::Stat</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(p1, p2, p3 = v3)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre>static VALUE zipruby_stat_initialize(int argc, VALUE *argv, VALUE self) {
+  VALUE archive, index, flags;
+  struct zipruby_archive *p_archive;
+  struct zipruby_stat *p_stat;
+  char *fname = NULL;
+  int i_index = -1, i_flags = 0;
+
+  rb_scan_args(argc, argv, &quot;21&quot;, &amp;archive, &amp;index, &amp;flags);
+
+  if (!rb_obj_is_instance_of(archive, Archive)) {
+    rb_raise(rb_eTypeError, &quot;wrong argument type %s (expected Zip::Archive)&quot;, rb_class2name(CLASS_OF(archive)));
+  }
+
+  switch (TYPE(index)) {
+  case T_STRING: fname = RSTRING_PTR(index); break;
+  case T_FIXNUM: i_index = NUM2INT(index); break;
+  default:
+    rb_raise(rb_eTypeError, &quot;wrong argument type %s (expected String or Fixnum)&quot;, rb_class2name(CLASS_OF(index)));
+  }
+
+  if (!NIL_P(flags)) {
+    i_flags = NUM2INT(flags);
+  }
+
+  Data_Get_Struct(archive, struct zipruby_archive, p_archive);
+  Check_Archive(p_archive);
+  Data_Get_Struct(self, struct zipruby_stat, p_stat);
+
+  if (fname) {
+    if (zip_stat(p_archive-&gt;archive, fname, i_flags, p_stat-&gt;sb) != 0) {
+      rb_raise(Error, &quot;Obtain file status failed - %s: %s&quot;, fname, zip_strerror(p_archive-&gt;archive));
+    }
+  } else {
+    if (zip_stat_index(p_archive-&gt;archive, i_index, i_flags, p_stat-&gt;sb) != 0) {
+      rb_raise(Error, &quot;Obtain file status failed at %d: %s&quot;, i_index, zip_strerror(p_archive-&gt;archive));
+    }
+  }
+
+  return Qnil;
+}</pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-comp_method" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">comp_method</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="comp_method-source">
+            <pre>VALUE zipruby_stat_comp_method(VALUE self) {
+  struct zipruby_stat *p_stat;
+
+  Data_Get_Struct(self, struct zipruby_stat, p_stat);
+
+  return INT2NUM(p_stat-&gt;sb-&gt;comp_method);
+}</pre>
+          </div><!-- comp_method-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- comp_method-method -->
+
+    
+      <div id="method-i-comp_size" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">comp_size</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="comp_size-source">
+            <pre>VALUE zipruby_stat_comp_size(VALUE self) {
+  struct zipruby_stat *p_stat;
+
+  Data_Get_Struct(self, struct zipruby_stat, p_stat);
+
+  return LONG2NUM(p_stat-&gt;sb-&gt;comp_size);
+}</pre>
+          </div><!-- comp_size-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- comp_size-method -->
+
+    
+      <div id="method-i-crc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">crc</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="crc-source">
+            <pre>VALUE zipruby_stat_crc(VALUE self) {
+  struct zipruby_stat *p_stat;
+
+  Data_Get_Struct(self, struct zipruby_stat, p_stat);
+
+  return UINT2NUM(p_stat-&gt;sb-&gt;crc);
+}</pre>
+          </div><!-- crc-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- crc-method -->
+
+    
+      <div id="method-i-directory-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">directory?</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="directory-3F-source">
+            <pre>VALUE zipruby_stat_is_directory(VALUE self) {
+  struct zipruby_stat *p_stat;
+  const char *name;
+  size_t name_len;
+  off_t size;
+
+  Data_Get_Struct(self, struct zipruby_stat, p_stat);
+  name = p_stat-&gt;sb-&gt;name;
+  size = p_stat-&gt;sb-&gt;size;
+
+  if (!name || size != 0) {
+    return Qfalse;
+  }
+
+  name_len = strlen(name);
+
+  if (name_len &gt; 0 &amp;&amp; name[name_len - 1] == '/') {
+    return Qtrue;
+  } else {
+    return Qfalse;
+  }
+}</pre>
+          </div><!-- directory-3F-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- directory-3F-method -->
+
+    
+      <div id="method-i-encryption_method" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">encryption_method</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="encryption_method-source">
+            <pre>VALUE zipruby_stat_encryption_method(VALUE self) {
+  struct zipruby_stat *p_stat;
+
+  Data_Get_Struct(self, struct zipruby_stat, p_stat);
+
+  return INT2NUM(p_stat-&gt;sb-&gt;encryption_method);
+}</pre>
+          </div><!-- encryption_method-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- encryption_method-method -->
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre>VALUE zipruby_stat_index(VALUE self) {
+  struct zipruby_stat *p_stat;
+
+  Data_Get_Struct(self, struct zipruby_stat, p_stat);
+
+  return INT2NUM(p_stat-&gt;sb-&gt;index);
+}</pre>
+          </div><!-- index-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- index-method -->
+
+    
+      <div id="method-i-mtime" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">mtime</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="mtime-source">
+            <pre>VALUE zipruby_stat_mtime(VALUE self) {
+  struct zipruby_stat *p_stat;
+
+  Data_Get_Struct(self, struct zipruby_stat, p_stat);
+
+  return rb_funcall(rb_cTime, rb_intern(&quot;at&quot;), 1,  LONG2NUM((long) p_stat-&gt;sb-&gt;mtime));
+}</pre>
+          </div><!-- mtime-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- mtime-method -->
+
+    
+      <div id="method-i-name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">name</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="name-source">
+            <pre>VALUE zipruby_stat_name(VALUE self) {
+  struct zipruby_stat *p_stat;
+
+  Data_Get_Struct(self, struct zipruby_stat, p_stat);
+
+  return p_stat-&gt;sb-&gt;name ? rb_str_new2(p_stat-&gt;sb-&gt;name) : Qnil;
+}</pre>
+          </div><!-- name-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- name-method -->
+
+    
+      <div id="method-i-size" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">size</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="size-source">
+            <pre>VALUE zipruby_stat_size(VALUE self) {
+  struct zipruby_stat *p_stat;
+
+  Data_Get_Struct(self, struct zipruby_stat, p_stat);
+
+  return LONG2NUM(p_stat-&gt;sb-&gt;size);
+}</pre>
+          </div><!-- size-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- size-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.11.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
