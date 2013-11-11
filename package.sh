@@ -1,5 +1,5 @@
 #!/bin/bash
-VERSION=0.3.7
+VERSION=0.3.8
 
 rm *.gem *.tar.bz2 2> /dev/null
 rm -rf doc
@@ -11,7 +11,7 @@ done
 cat ext/*.c >> zip_ruby.c
 
 exit
-fuu
+
 
 cp ../libzip/*.{c,h} ext
 rdoc -w 4 -SHN -m README.txt README.txt zipruby.c LICENSE.libzip ChangeLog --title 'Zip/Ruby - Ruby bindings for libzip.'
