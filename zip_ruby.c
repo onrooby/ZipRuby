@@ -4885,7 +4885,7 @@ _zip_replace(struct zip *za, int idx, const char *name,
     return idx;
 }
 #ifdef _WIN32
-__declspec(dllexport) void Init_zipruby(void);
+__declspec(dllexport) void Init_zip_ruby(void);
 #endif
 
 #include "zip_ruby.h"
@@ -4895,7 +4895,7 @@ __declspec(dllexport) void Init_zipruby(void);
 #include "zip_ruby_stat.h"
 #include "zip_ruby_error.h"
 
-void Init_zipruby() {
+void Init_zip_ruby() {
   Init_zipruby_zip();
   Init_zipruby_archive();
   Init_zipruby_file();
