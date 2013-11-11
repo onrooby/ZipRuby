@@ -1,3 +1,8 @@
+2013-11-11 mtgrosser
+
+   * rename gem to zip_ruby to avoid namespace clashes with
+     other zip gems
+
 2010-01-23 winebarrel
 
    * fixes bug: [ruby-dev:40120] SEGV on zipruby with irb
